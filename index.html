@@ -23,14 +23,52 @@
     }
 
     .ball {
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(circle at 30% 30%, #ff4b2b, #ff416c);
       border-radius: 50%;
       position: absolute;
       cursor: pointer;
-      box-shadow: 0 0 15px #ff416c88, 0 0 30px #ff416c55;
       animation: popIn 0.3s ease-out, fadeOut 2s ease-in forwards;
+    }
+
+    .ball-small {
+      width: 60px;
+      height: 60px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .ball-medium {
+      width: 80px;
+      height: 80px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+
+    .ball-large {
+      width: 100px;
+      height: 100px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .ball-red {
+      background: radial-gradient(circle at 30% 30%, #ff4b2b, #ff416c);
+    }
+
+    .ball-blue {
+      background: radial-gradient(circle at 30% 30%, #4facfe, #00f2fe);
+    }
+
+    .ball-green {
+      background: radial-gradient(circle at 30% 30%, #43e97b, #38f9d7);
+    }
+
+    .ball-purple {
+      background: radial-gradient(circle at 30% 30%, #fa709a, #fee140);
+    }
+
+    .ball-orange {
+      background: radial-gradient(circle at 30% 30%, #ff9a9e, #fecfef);
+    }
+
+    .ball-yellow {
+      background: radial-gradient(circle at 30% 30%, #ffecd2, #fcb69f);
     }
 
     @keyframes popIn {
@@ -95,6 +133,122 @@
       transform: translate(-50%, -50%) scale(1.05);
     }
 
+    #legend {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px;
+      border-radius: 12px;
+      color: #333;
+      font-size: 14px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      max-width: 200px;
+    }
+
+    #legend h4 {
+      margin: 0 0 10px 0;
+      color: #028db0;
+      font-size: 16px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+    }
+
+    .legend-ball {
+      border-radius: 50%;
+      margin-right: 10px;
+      background: radial-gradient(circle at 30% 30%, #ff4b2b, #ff416c);
+    }
+
+    .legend-small { width: 20px; height: 20px; }
+    .legend-medium { width: 25px; height: 25px; }
+    .legend-large { width: 30px; height: 30px; }
+
+    #difficultySelector {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -70%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      z-index: 15;
+      text-align: center;
+      color: #333;
+      display: none;
+    }
+
+    #difficultySelector h3 {
+      margin: 0 0 15px 0;
+      color: #028db0;
+      font-size: 20px;
+    }
+
+    .difficulty-btn {
+      display: block;
+      width: 200px;
+      margin: 10px auto;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      color: white;
+      font-weight: bold;
+    }
+
+    .difficulty-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-easy {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+
+    .btn-medium {
+      background: linear-gradient(135deg, #43e97b, #38f9d7);
+    }
+
+    .btn-hard {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    }
+
+    /* Animações de movimento */
+    @keyframes moveSlowly {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(50px, 30px); }
+      50% { transform: translate(-30px, 50px); }
+      75% { transform: translate(40px, -20px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes moveFast {
+      0% { transform: translate(0, 0); }
+      12.5% { transform: translate(80px, 60px); }
+      25% { transform: translate(-60px, 40px); }
+      37.5% { transform: translate(70px, -50px); }
+      50% { transform: translate(-40px, 80px); }
+      62.5% { transform: translate(90px, -30px); }
+      75% { transform: translate(-70px, -60px); }
+      87.5% { transform: translate(50px, 70px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .ball-moving-slow {
+      animation: popIn 0.3s ease-out, fadeOut 2s ease-in forwards, moveSlowly 4s ease-in-out infinite;
+    }
+
+    .ball-moving-fast {
+      animation: popIn 0.3s ease-out, fadeOut 2s ease-in forwards, moveFast 1.5s ease-in-out infinite;
+    }
+
     #countdown {
       position: absolute;
       top: 50%;
@@ -127,9 +281,41 @@
 
 <div id="gameArea">
   <div id="scoreboard">Pontos: 0</div>
-  <div id="timer">Tempo: 15s</div>
+  <div id="timer">Tempo: 60s</div>
   <div id="countdown"></div>
   <button id="startBtn">Iniciar Jogo</button>
+  
+  <div id="difficultySelector">
+    <h3>🎯 Escolha a Dificuldade</h3>
+    <button class="difficulty-btn btn-easy" data-difficulty="easy">
+      😊 Fácil<br>
+      <small>Bolinhas paradas</small>
+    </button>
+    <button class="difficulty-btn btn-medium" data-difficulty="medium">
+      😐 Médio<br>
+      <small>Bolinhas se movem devagar</small>
+    </button>
+    <button class="difficulty-btn btn-hard" data-difficulty="hard">
+      😤 Difícil<br>
+      <small>Bolinhas se movem rápido</small>
+    </button>
+  </div>
+  
+  <div id="legend">
+    <h4>Pontuação:</h4>
+    <div class="legend-item">
+      <div class="legend-ball legend-small"></div>
+      <span>Pequena: 3 pts</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-ball legend-medium"></div>
+      <span>Média: 2 pts</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-ball legend-large"></div>
+      <span>Grande: 1 pt</span>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -138,12 +324,14 @@
   const timerDisplay = document.getElementById('timer');
   const countdown = document.getElementById('countdown');
   const startBtn = document.getElementById('startBtn');
+  const difficultySelector = document.getElementById('difficultySelector');
 
   let score = 0;
-  let gameDuration = 15; // segundos
+  let gameDuration = 60; // segundos
   let gameActive = false;
   let intervalId;
   let timerInterval;
+  let currentDifficulty = 'easy'; // padrão
 
   function createBall() {
     if (!gameActive) return;
@@ -151,14 +339,48 @@
     const ball = document.createElement('div');
     ball.classList.add('ball');
 
-    const x = Math.random() * (window.innerWidth - 50);
-    const y = Math.random() * (window.innerHeight - 50);
+    // Definir tamanhos e cores aleatórios
+    const sizes = ['small', 'medium', 'large'];
+    const colors = ['red', 'blue', 'green', 'purple', 'orange', 'yellow'];
+    
+    const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    
+    ball.classList.add(`ball-${randomSize}`);
+    ball.classList.add(`ball-${randomColor}`);
+
+    // Adicionar movimento baseado na dificuldade
+    if (currentDifficulty === 'medium') {
+      ball.classList.add('ball-moving-slow');
+    } else if (currentDifficulty === 'hard') {
+      ball.classList.add('ball-moving-fast');
+    }
+
+    // Definir pontuação baseada no tamanho (bolinhas menores valem mais)
+    let ballValue = 1;
+    if (randomSize === 'small') ballValue = 3;
+    else if (randomSize === 'medium') ballValue = 2;
+    else if (randomSize === 'large') ballValue = 1;
+
+    // Multiplicador de pontuação baseado na dificuldade
+    let difficultyMultiplier = 1;
+    if (currentDifficulty === 'medium') difficultyMultiplier = 1.5;
+    else if (currentDifficulty === 'hard') difficultyMultiplier = 2;
+    
+    ballValue = Math.floor(ballValue * difficultyMultiplier);
+
+    // Posicionamento considerando o tamanho da bolinha e área de movimento
+    const ballSize = randomSize === 'small' ? 60 : randomSize === 'medium' ? 80 : 100;
+    const movementMargin = currentDifficulty === 'hard' ? 150 : currentDifficulty === 'medium' ? 100 : 0;
+    
+    const x = Math.random() * (window.innerWidth - ballSize - movementMargin * 2) + movementMargin;
+    const y = Math.random() * (window.innerHeight - ballSize - movementMargin * 2) + movementMargin;
     ball.style.left = `${x}px`;
     ball.style.top = `${y}px`;
 
     ball.addEventListener('click', () => {
       if (!gameActive) return;
-      score++;
+      score += ballValue;
       scoreboard.textContent = `Pontos: ${score}`;
       ball.remove();
     });
@@ -203,12 +425,82 @@
     next();
   }
 
+  function showDifficultySelector() {
+    difficultySelector.style.display = 'block';
+    startBtn.style.display = 'none';
+  }
+
+  function hideDifficultySelector() {
+    difficultySelector.style.display = 'none';
+  }
+
+  function updateLegendForDifficulty() {
+    const legend = document.getElementById('legend');
+    let legendHTML = '<h4>Pontuação:</h4>';
+    
+    if (currentDifficulty === 'easy') {
+      legendHTML += `
+        <div class="legend-item">
+          <div class="legend-ball legend-small"></div>
+          <span>Pequena: 3 pts</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-ball legend-medium"></div>
+          <span>Média: 2 pts</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-ball legend-large"></div>
+          <span>Grande: 1 pt</span>
+        </div>
+      `;
+    } else if (currentDifficulty === 'medium') {
+      legendHTML += `
+        <div class="legend-item">
+          <div class="legend-ball legend-small"></div>
+          <span>Pequena: 4 pts</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-ball legend-medium"></div>
+          <span>Média: 3 pts</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-ball legend-large"></div>
+          <span>Grande: 1 pt</span>
+        </div>
+        <div style="margin-top: 10px; font-size: 12px; color: #666;">
+          🏃‍♂️ Bolinhas se movem devagar
+        </div>
+      `;
+    } else if (currentDifficulty === 'hard') {
+      legendHTML += `
+        <div class="legend-item">
+          <div class="legend-ball legend-small"></div>
+          <span>Pequena: 6 pts</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-ball legend-medium"></div>
+          <span>Média: 4 pts</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-ball legend-large"></div>
+          <span>Grande: 2 pts</span>
+        </div>
+        <div style="margin-top: 10px; font-size: 12px; color: #666;">
+          🏃‍♂️💨 Bolinhas se movem rápido
+        </div>
+      `;
+    }
+    
+    legend.innerHTML = legendHTML;
+  }
   function startGame() {
     score = 0;
     gameActive = false;
     scoreboard.textContent = `Pontos: 0`;
     updateTimer(gameDuration);
+    hideDifficultySelector();
     startBtn.style.display = 'none';
+    updateLegendForDifficulty();
 
     runPreGameCountdown(() => {
       gameActive = true;
@@ -234,14 +526,30 @@
         clearInterval(timerInterval);
         gameActive = false;
         document.querySelectorAll('.ball').forEach(b => b.remove());
-        startBtn.style.display = 'block';
-        startBtn.textContent = `Jogar Novamente`;
-        alert(`⏰ Tempo esgotado!\nVocê clicou em ${score} bolinha(s).`);
+        showDifficultySelector();
+        
+        let difficultyText = '';
+        if (currentDifficulty === 'easy') difficultyText = 'Fácil';
+        else if (currentDifficulty === 'medium') difficultyText = 'Médio';
+        else if (currentDifficulty === 'hard') difficultyText = 'Difícil';
+        
+        alert(`⏰ Tempo esgotado!\nDificuldade: ${difficultyText}\nVocê fez ${score} pontos!`);
       }, gameDuration * 1000);
     });
   }
 
-  startBtn.addEventListener('click', startGame);
+  // Event listeners para seleção de dificuldade
+  document.querySelectorAll('.difficulty-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      currentDifficulty = e.target.getAttribute('data-difficulty');
+      startGame();
+    });
+  });
+
+  startBtn.addEventListener('click', showDifficultySelector);
+
+  // Inicializar o jogo mostrando o seletor de dificuldade
+  showDifficultySelector();
 </script>
 
 </body>
